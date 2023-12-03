@@ -1,10 +1,15 @@
+const { mod } = require('./util');
+
 function vigenereCipher(msg, k, alphabet, n) {
   let key = makeVigenereKey(msg, k, alphabet);
 
   let messageArr = msg.split('');
+
   let encryptedMessageArr = messageArr.map((char, i) => {
+
     let charIndex = alphabet.indexOf(char.toLowerCase());
     let keyIndex = alphabet.indexOf(key[i].toLowerCase());
+
     if (charIndex != -1) {
       let encryptedCharIndex = (charIndex + keyIndex) % n;
       return alphabet[encryptedCharIndex];
@@ -12,7 +17,29 @@ function vigenereCipher(msg, k, alphabet, n) {
       return msg[i];
     }
   })
+
   return encryptedMessageArr.join('');
+}
+
+function decryptVigenereCipher(cipher, k, alphabet, n) {
+  let key = makeVigenereKey(cipher, k, alphabet);
+
+  let cipherArr = cipher.split('');
+
+  let decryptedCipherArr = cipherArr.map((char, i) => {
+
+    let charIndex = alphabet.indexOf(char.toLowerCase());
+    let keyIndex = alphabet.indexOf(key[i].toLowerCase());
+
+    if (charIndex != -1) {
+      let decryptedCharIndex = mod((charIndex - keyIndex), n);
+      return alphabet[decryptedCharIndex];
+    } else {
+      return cipher[i];
+    }
+  })
+  
+  return decryptedCipherArr.join('');
 }
 
 function makeVigenereKey(msg, key, alphabet) {
@@ -31,4 +58,4 @@ function makeVigenereKey(msg, key, alphabet) {
   return key;
 }
 
-module.exports = vigenereCipher;
+module.exports = { vigenereCipher, decryptVigenereCipher};
