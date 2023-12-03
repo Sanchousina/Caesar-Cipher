@@ -1,3 +1,5 @@
+const { mod } = require('./util');
+
 function caesarCipher(msg, key, alphabet, n) {
   let messageArr = msg.split('');
   let encryptedMessageArr = messageArr.map((char, i) => {
@@ -12,4 +14,25 @@ function caesarCipher(msg, key, alphabet, n) {
   return encryptedMessageArr.join('');
 }
 
-module.exports = caesarCipher;
+function decryptCaesarCipher(cipher, key, alphabet, n) {
+  let cipherArr = cipher.split('');
+
+  let decryptedCipherArr = cipherArr.map((char, i) => {
+    let charIndex = alphabet.indexOf(char.toLowerCase());
+
+    if (charIndex != -1) {
+      let decryptedCharIndex = mod((charIndex - key), n);
+      return char === char.toUpperCase() ? alphabet[decryptedCharIndex].toUpperCase() : alphabet[decryptedCharIndex];
+    } else {
+      return cipher[i];
+    }
+  })
+
+  return decryptedCipherArr.join('');
+}
+
+// function mod(n, m) {
+//   return ((n % m) + m) % m;
+// }
+
+module.exports = {caesarCipher, decryptCaesarCipher};
