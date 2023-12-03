@@ -1,5 +1,5 @@
 const { caesarCipher } = require('./caesarCipher');
-const vigenereCipher = require('./vigenereCipher');
+const { vigenereCipher } = require('./vigenereCipher');
 
 //const alphabet = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя';
 

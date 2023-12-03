@@ -31,8 +31,4 @@ function decryptCaesarCipher(cipher, key, alphabet, n) {
   return decryptedCipherArr.join('');
 }
 
-// function mod(n, m) {
-//   return ((n % m) + m) % m;
-// }
-
 module.exports = {caesarCipher, decryptCaesarCipher};
