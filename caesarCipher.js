@@ -14,20 +14,8 @@ function encryptMessage(msg, key, alphabet, n) {
   return encryptedMessageArr.join('');
 }
 
-function vigenereCipher(msg, key, alphabet, n) {
-  let i = 0;
-  let keyLength = key.length;
-  let j = keyLength;
-  while(key.length < msg.length) {
-    if (alphabet.indexOf(msg[j].toLowerCase()) != -1) {
-      key += key[i%keyLength];
-      i++;
-    } else {
-      key += ' ';
-    }
-    j++;
-  }
-  //console.log(key);
+function vigenereCipher(msg, k, alphabet, n) {
+  let key = makeVigenereKey(msg, k);
 
   let messageArr = msg.split('');
   let encryptedMessageArr = messageArr.map((char, i) => {
@@ -41,6 +29,22 @@ function vigenereCipher(msg, key, alphabet, n) {
     }
   })
   return encryptedMessageArr.join('');
+}
+
+function makeVigenereKey(msg, key) {
+  let i = 0;
+  let keyLength = key.length;
+  let j = keyLength;
+  while(key.length < msg.length) {
+    if (alphabet.indexOf(msg[j].toLowerCase()) != -1) {
+      key += key[i%keyLength];
+      i++;
+    } else {
+      key += ' ';
+    }
+    j++;
+  }
+  return key;
 }
 
 
