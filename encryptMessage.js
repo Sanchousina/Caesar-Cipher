@@ -10,8 +10,6 @@ function encryptMessage(msg, key, alphabet, keyType='number') {
     return caesarCipher(msg, key, alphabet, n);
   } else if (keyType === 'word') {
     return vigenereCipher(msg, key, alphabet, n);
-  } else if (keyType === 'sentence') {
-    console.log('Not yet implemented')
   } else {
     console.log('This key type is not supported')
   }
